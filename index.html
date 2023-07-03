@@ -1,17 +1,57 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Expense Tracker</title>
-</head>
-<body>
-  <h1>Expense Tracker</h1>
-  <form id="expenseForm">
-    <input type="text" id="expenseName" placeholder="Expense Name" required />
-    <input type="number" id="expenseAmount" placeholder="Amount" required />
-    <button type="submit">Add Expense</button>
-  </form>
-  <ul id="expenseList"></ul>
 
-  <script src="app.js"></script>
+<head>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="heading1">EXPENSE TRACKER</h1>
+        <form id="myform">
+            <div class="mt-4">
+                <label for="amount">Choose Amount </label>
+                <input type="text" id="amount" class="form-control">
+            </div>
+
+            <div class="mt-3">
+                <label for="description">Choose Description </label>
+                <select id="description" class="form-control">
+                    <option value="vegetables">Vegetables</option>
+                    <option value="tickets">Tickets</option>
+                    <option value="electricity">Electricity</option>
+                    <option value="rent">Rent</option>
+                </select>
+            </div>
+
+            <div class="mt-3">
+                <label for="category">Choose Category </label>
+                <select id="category" class="form-control">
+                    <option value="Food">Food</option>
+                    <option value="Travel">Travel</option>
+                    <option value="Utilities">Utilities</option>
+                    <option value="Miscellaneous">Miscellaneous</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary mt-3">Add Expenses</button>
+        </form>
+        <ul id="listofItems"></ul>
+    </div>
+
+    <script src="app.js"></script>
+
 </body>
+
 </html>
