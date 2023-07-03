@@ -1,74 +1,53 @@
-// Retrieve expenses from local storage (if any)
-let expenses = JSON.parse(localStorage.getItem("expenses")) || [];
-
-// Get form and expense list references
-const expenseForm = document.getElementById("expenseForm");
-const expenseList = document.getElementById("expenseList");
-
-// Function to render expenses
-function renderExpenses() {
-  // Clear existing list
-  expenseList.innerHTML = "";
-
-  // Render each expense item
-  expenses.forEach((expense, index) => {
-    const expenseItem = document.createElement("li");
-    expenseItem.innerHTML = `
-      <span>${expense.name}</span>
-      <span>${expense.amount}</span>
-      <button onclick="deleteExpense(${index})">Delete</button>
-    `;
-    expenseList.appendChild(expenseItem);
-  });
-
-  // Save expenses to local storage
-  localStorage.setItem("expenses", JSON.stringify(expenses));
-}
-
-// Function to handle form submission
-function addExpense(event) {
+var result = document.getElementById("myform");
+result.addEventListener("submit", function (event) {
   event.preventDefault();
 
-  // Get expense details from form
-  const expenseNameInput = document.getElementById("expenseName");
-  const expenseAmountInput = document.getElementById("expenseAmount");
-  const name = expenseNameInput.value;
-  const amount = parseFloat(expenseAmountInput.value);
+  let ans = event.target.amount.value;
+  let ans2 = event.target.description.value;
+  let ans3 = event.target.category.value;
 
-  // Validate inputs
-  if (!name || !amount || isNaN(amount)) {
-    alert("Please enter a valid name and amount.");
-    return;
+  let obj = {
+    ans,
+    ans2,
+    ans3
+  }
+  localStorage.getItem("details", JSON.stringify(obj));
+  showResult(obj);
+
+
+
+  function showResult() {
+    let parent = document.getElementById("listofItems");
+    let child1 = document.createElement("li");
+    child1.textContent = obj.ans + " " + obj.ans2 + " " + obj.ans3;
+
+    let child2 = document.createElement("input");
+    child2.type = "button";
+    child2.style.margin = "4px";
+    child2.value = "delete";
+
+    child2.onclick = () => {
+      localStorage.removeItem("details");
+      parent.removeChild(child1);
+    }
+
+    let child3 = document.createElement("input");
+    child3.type = "button";
+    child3.value = "Edit";
+
+    child3.onclick = () => {
+      localStorage.removeItem("details");
+      parent.removeChild(child1);
+
+      document.getElementById("amount").value = obj.ans;
+      document.getElementById("description").value = obj.ans2;
+      document.getElementById("category").value = obj.ans3;
+    }
+    child1.appendChild(child2);
+    child1.appendChild(child3);
+    parent.appendChild(child1);
+
+
   }
 
-  // Create new expense object
-  const expense = {
-    name,
-    amount
-  };
-
-  // Add expense to expenses array
-  expenses.push(expense);
-
-  // Clear form inputs
-  expenseNameInput.value = "";
-  expenseAmountInput.value = "";
-
-  // Render updated expenses
-  renderExpenses();
-}
-
-// Function to delete an expense
-function deleteExpense(index) {
-  // Remove expense from expenses array
-  expenses.splice(index, 1);
-
-  // Render updated expenses
-  renderExpenses();
-}
-
-// Attach event listener to form submission
-expenseForm.addEventListener("submit", addExpense);
-
-// Render initial expenses
-renderExpenses();
+})
